@@ -32,7 +32,7 @@ angular.module('rvplusplus')
   
   var patt = new RegExp('^[0-9]+$');
   $scope.$watch('searchedProduct', function(){
-  	if($scope.searchedProduct && $scope.searchedProduct._id !== null){
+  	if($scope.searchedProduct && $scope.searchedProduct._id !== undefined){
   		$scope.basket.products.push({product:$scope.searchedProduct, count:1});
   		$scope.searchedProduct = '';
   	}
