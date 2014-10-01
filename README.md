@@ -41,3 +41,15 @@ Tuotteista mietittyä:
  - Tuotteiden on tuettava negatiivista veloitusta ostajalle (pullonpalautus)
  - Tuotteiden on tuettava tuotteita joiden määrä ei vähene koskaan.
 
+## Kuinka tätä ajetaan?
+
+```bash
+# asennetaan riippuvuudet
+npm install
+bower install
+
+# gulp
+gulp serve
+
+# profit
+```
