@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <ol class="breadcrumb">
+        <li><a ng-href="#/products">Products</a></li>
+        <li class="active">{{product.name}}</li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <h1 editable-text="product.name">{{ product.name || "No name" }}</h1>
+      <p editable-textarea="product.description" e-rows="7" e-cols="40">{{product.description || "No description"}}</p>
+      <h4>Price</h4>
+      <strong editable-text="product.price">{{product.price || 0}}</strong>€
+      <h4>Store</h4>
+      <strong editable-text="product.count">{{product.count || 0}}</strong>
+      <h4>EAN-codes</h4>
+      <tags-input ng-model="product.eanCodes" allowed-tags-pattern="\d+" placeholder="Add a EAN-code"></tags-input>
+      <div class="alert alert-warning" ng-hide="eanOK">
+        EAN-codes may be wrong!
+      </div>
+      <h4>Flags</h4>
+      </div>
+      <a href="#" editable-checkbox="product.flags.unlimited" e-title="Unlimited?">
+        {{ product.flags.unlimited && "This is unlimited superproduct!" || "This is just normal limited product" }}
+      </a><br>
+      <a href="#" editable-checkbox="product.flags.cantbuy" e-title="Can't buy?">
+        {{ product.flags.cantbuy && "You can't buy this product." || "You can buy this product." }}
+      </a>
+      <hr>
+      <button class="btn btn-success" ng-click="saveProduct(product)">Do the KUNG-FU! (save)</button>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,31 @@
+<div class="container">
+
+  <div class="row well">
+    <div class="col-12">
+      <input type="text" init-focus class="sfTypeahead form-control" options="productSearchOptions" datasets="productsDataset" ng-model="searchedProduct">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Count</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="line in basket.products">
+            <td>{{line.product.name}}</td>
+            <td>{{line.product.price}}</td>
+            <td>{{line.count}}</td>
+            <td><button class="btn btn-xs btn-danger" ng-click="deleteFromBasket(line)">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
