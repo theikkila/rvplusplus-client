@@ -14,12 +14,7 @@ gulp.task('test', function() {
     devDependencies: true
   });
 
-  var testFiles = bowerDeps.js.concat([
-    'app/scripts/**/*.js',
-    'test/unit/**/*.js'
-  ]);
-
-  return gulp.src(testFiles)
+  return gulp.src('./foobar')
     .pipe($.karma({
       configFile: 'test/karma.conf.js',
       action: 'run'

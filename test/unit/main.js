@@ -8,15 +8,35 @@ describe('controllers', function(){
   beforeEach(inject(function($rootScope) {
   	scope = $rootScope.$new();
   }));
+  describe('MainCtrl', function(){
+    it('should have change-function', inject(function($controller) {
+      expect(scope.change).toBeUndefined();
 
-  it('should define more than 5 awesome things', inject(function($controller) {
-    expect(scope.awesomeThings).toBeUndefined();
+      $controller('MainCtrl', {
+        $scope: scope
+    	});
+      expect(angular.isFunction(scope.change)).toBeTruthy();
+    }));    
+  });
+  describe('BasketCtrl', function(){
+    it('should have deleteFromBasket-function', inject(function($controller) {
+      expect(scope.deleteFromBasket).toBeUndefined();
 
-    $controller('MainCtrl', {
-      $scope: scope
-  	});
+      $controller('BasketCtrl', {
+        $scope: scope
+      });
+      expect(angular.isFunction(scope.deleteFromBasket)).toBeTruthy();
+    }));    
+  });
+  describe('ProductCtrl', function(){
+    it('should have saveProduct-function', inject(function($controller) {
+      expect(scope.saveProduct).toBeUndefined();
 
-    expect(angular.isArray(scope.awesomeThings)).toBeTruthy();
-    expect(scope.awesomeThings.length > 5).toBeTruthy();
-  }));
+      $controller('ProductCtrl', {
+        $scope: scope,
+        $stateParams: {id:1}
+      });
+      expect(angular.isFunction(scope.saveProduct)).toBeTruthy();
+    }));    
+  });
 });
