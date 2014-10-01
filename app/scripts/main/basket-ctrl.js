@@ -33,7 +33,14 @@ angular.module('rvplusplus')
   var patt = new RegExp('^[0-9]+$');
   $scope.$watch('searchedProduct', function(){
   	if($scope.searchedProduct && $scope.searchedProduct._id !== undefined){
-  		$scope.basket.products.push({product:$scope.searchedProduct, count:1});
+      var pr = _.find($scope.basket.products, function(line){
+            return line.product._id === $scope.searchedProduct._id;
+          });
+      if(pr !== undefined){
+        pr.count++;
+      }else{
+  		  $scope.basket.products.push({product:$scope.searchedProduct, count:1});
+      }
   		$scope.searchedProduct = '';
   	}
 	if (patt.test($scope.searchedProduct)) {
@@ -51,8 +58,17 @@ angular.module('rvplusplus')
 		var checksum = 10 - sum % 10;
 		if(checksum === checkmark){
 			Restangular.all('products').getList({conditions: JSON.stringify({'eanCodes': $scope.searchedProduct})}).then(function(products){
-				$scope.basket.products.push({product:products[0], count:1});
-				$scope.searchedProduct = '';
+        if(products && products.length >= 1){
+          var pr = _.find($scope.basket.products, function(line){
+            return line.product._id === products[0]._id;
+          });
+          if(pr !== undefined){
+            pr.count++;
+          }else{
+  				  $scope.basket.products.push({product:products[0], count:1});          
+          }
+				  $scope.searchedProduct = '';
+        }
 			});
 		}
 	}
@@ -61,5 +77,12 @@ angular.module('rvplusplus')
   //console.log($scope.searchedProduct);
   $scope.deleteFromBasket = function (line) {
   	$scope.basket.products = _.without($scope.basket.products, line);
+  };
+  $scope.basketPrice = function () {
+    var sum = 0;
+    $scope.basket.products.forEach(function(line){
+      sum += line.count * line.product.price;
+    });
+    return sum;
   };
 });
